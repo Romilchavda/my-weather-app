@@ -1,0 +1,19 @@
+# Environment variables (Sabse zaroori)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Dependencies
+node_modules/
+
+# Production build
+dist/
+dist-ssr/
+*.local
+
+# Editor folders
+.vscode/
+.idea/
+.DS_Store
