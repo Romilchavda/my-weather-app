@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: ["main"] # Agar aapka branch 'master' hai toh wo likhein
+    branches: ["main"] # Agar aapka branch 'master' hai toh yahan master likhein
 
 permissions:
   contents: read
@@ -10,34 +10,29 @@ permissions:
   id-token: write
 
 jobs:
-  build_site:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Install Node.js
+      - name: Set up Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'npm'
-
       - name: Install dependencies
         run: npm install
-
       - name: Build
-        # YAHAN SECRET USE HO RAHA HAI
         run: npm run build
         env:
           VITE_WEATHER_API_KEY: ${{ secrets.VITE_WEATHER_API_KEY }}
-
-      - name: Upload Artifacts
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "./dist"
+          path: ./dist
 
   deploy:
-    needs: build_site
+    needs: build
     runs-on: ubuntu-latest
     environment:
       name: github-pages

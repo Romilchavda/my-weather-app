@@ -1,4 +1,7 @@
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
 export default defineConfig({
-  base: '/my-weather-app/', // Apne repo ka naam yahan likhein
   plugins: [react()],
+  base: './my-weather-app', // <--- Ye line zaroor add karein
 })
